@@ -5,8 +5,9 @@ using UnityEngine;
 public class PlayerControllerX : MonoBehaviour
 {
     public bool gameOver;
+    private bool isLowEnough = false;
 
-    public float maxHeight = 16f;
+    public float maxHeight = 10f;
     public float floatForce;
     private float gravityModifier = 1.5f;
     private Rigidbody playerRb;
@@ -39,8 +40,15 @@ public class PlayerControllerX : MonoBehaviour
         {
             if(transform.position.y < maxHeight)
             {
+                isLowEnough = true;
                 playerRb.AddForce(Vector3.up * floatForce);
             }
+            else if(transform.position.y == maxHeight)
+            {
+                isLowEnough = false;
+                playerRb.velocity = Vector3.zero;
+            }
+                
         }
     }
 
